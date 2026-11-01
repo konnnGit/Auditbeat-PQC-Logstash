@@ -1,12 +1,12 @@
 
-# Dockerized PQC mTLS Testbed
+# Dockerized PQC mTLS Auditbeat and Logstash Testbed
 
 ## 1. Prerequisites
 
 - Docker and Docker Compose
 - `openquantumsafe/oqs-ossl3` image for certificate generation
 - `dockurr/stunnel` image for PQC TLS transport
-- Auditbeat and Logstash 
+- Auditbeat and Logstash images
 
 
 Create networks
