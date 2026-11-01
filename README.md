@@ -1,13 +1,26 @@
+
 # Dockerized PQC mTLS Testbed
 
-### 1. Prerequisites
-#### -Docker and Docker Compose
-#### -openquantumsafe/oqs-ossl3 image for certificate generation
-#### -dockurr/stunnel image for PQC TLS transport
-#### -Auditbeat and Logstash 9.2.0
-#### -Existing configuration files in certs/, stunnel/, auditbeat/, and logstash/pipeline/
+## 1. Prerequisites
 
-#### Create networks
-```bash
+- Docker and Docker Compose
+- `openquantumsafe/oqs-ossl3` image for certificate generation
+- `dockurr/stunnel` image for PQC TLS transport
+- Auditbeat and Logstash 
+
+
+Create networks
+```bash 
 docker network create pqc-net log-net beat-net
+```
+
+## 2. Generate PQC Cerificates
+Run once initially, or whenever certificates need to be regenerated.
+```bash
+docker run --rm \
+  --entrypoint /bin/sh \
+  -v "$PWD/init-certs.sh:/init-certs.sh:ro" \
+  -v "$PWD/certs:/certs" \
+  openquantumsafe/oqs-ossl3:latest \
+  /init-certs.sh
 ```
