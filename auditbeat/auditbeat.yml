@@ -1,0 +1,15 @@
+
+auditbeat.modules:
+  - module: system
+    datasets:
+      - host
+      - login
+      - process
+    period: 30s
+
+output.logstash:
+  hosts: ["pqc-stunnel-client:5044"]
+  ssl.enabled: false
+
+logging.level: info
+logging.to_stderr: true

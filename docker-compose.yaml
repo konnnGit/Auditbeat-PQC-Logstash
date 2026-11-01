@@ -1,0 +1,65 @@
+
+services:
+  pqc-stunnel-server:
+    image: dockurr/stunnel:latest
+    container_name: pqc-stunnel-server
+    restart: unless-stopped
+    volumes:
+      - ./stunnel/server.conf:/stunnel.conf:ro
+      - ./certs:/certs:ro
+    networks:
+      - pqc-net
+      - log-net
+      
+
+  pqc-stunnel-client:
+    image: dockurr/stunnel:latest
+    container_name: pqc-stunnel-client
+    restart: unless-stopped
+    depends_on:
+      - pqc-stunnel-server
+    volumes:
+      - ./stunnel/client.conf:/stunnel.conf:ro
+      - ./certs:/certs:ro
+    networks:
+      - pqc-net
+      - beat-net
+    ports:
+      - "127.0.0.1:5044:5044"
+
+
+  auditbeat:
+    image: docker.elastic.co/beats/auditbeat:9.2.0
+    container_name: auditbeat
+    user: root
+    restart: unless-stopped
+    depends_on:
+      - pqc-stunnel-client
+    volumes:
+      - ./auditbeat/auditbeat.yml:/usr/share/auditbeat/auditbeat.yml:ro
+      - auditbeat-data:/usr/share/auditbeat/data
+    command: ["-e", "--strict.perms=false"]
+    networks:
+      - beat-net
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:9.2.0
+    container_name: logstash
+    restart: unless-stopped
+    environment:
+      LS_JAVA_OPTS: "-Xms512m -Xmx512m"
+    volumes:
+      - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
+    networks:
+      - log-net
+
+networks:
+  pqc-net:
+    external: true
+  log-net:
+    external: false
+  beat-net: 
+    external: false
+
+volumes:
+  auditbeat-data:

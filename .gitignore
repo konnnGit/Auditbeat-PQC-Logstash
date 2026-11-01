@@ -1,0 +1,7 @@
+cat > .gitignore <<'EOF'
+certs/
+*.key
+*.pem
+*.pcap
+.env
+EOF
