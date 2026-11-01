@@ -8,6 +8,6 @@
 ### -Existing configuration files in certs/, stunnel/, auditbeat/, and logstash/pipeline/
 
 Create networks
-'''
+'''bash
 docker network create pqc-net log-net beat-net
 '''
