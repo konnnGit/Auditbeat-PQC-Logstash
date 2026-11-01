@@ -18,6 +18,12 @@ docker network create pqc-net log-net beat-net
 Run once initially, or whenever certificates need to be regenerated. The bash script generates the CA, client, and server certificates and private keys in certs/. In case alternative DSA should be tested, change the paremeter in the field  ```bash -newkey mldsa44``` existing in the script. In case that alternative KEM should be tested, the appropriate value ```bash curves = MLKEM768```, in stunnel .conf files, should be changed. For the supported ssl1.3 PQC DSA & KEM algorithms refer to https://github.com/open-quantum-safe/oqs-provider. 
 
 ```bash
+cd ~/
+```
+```bash
+git clone https://github.com/konnnGit/Auditbeat-PQC-Logstash.git
+```
+```bash
 cd ~/Auditbeat-PQC-Logstash/certs/
 ```
 ```bash
