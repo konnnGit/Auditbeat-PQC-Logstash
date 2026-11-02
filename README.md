@@ -60,4 +60,4 @@ After system boots, verify that logstash receives auditbeat events:
 docker compose logs -f logstash
 ```
 As depicted in the following picture, during the handshake the MLKEM was negotiated.
-
+![pic][mlkem.png]
