@@ -13,7 +13,7 @@ Create networks
 ```bash 
 docker network create pqc-net log-net beat-net
 ```
-
+The log/beat  are local nets for logstash and auditbeat, respectively, and the pqc-net is the public one.
 ## 2. Generate PQC Cerificates
 Run once initially, or whenever certificates need to be regenerated. The bash script generates the CA, client, and server certificates and private keys in certs/. In case alternative DSA should be tested, change the paremeter of the field 
  ```bash 
@@ -59,5 +59,5 @@ After system boots, verify that logstash receives auditbeat events:
 ```bash
 docker compose logs -f logstash
 ```
-
+As depicted in the following picture, during the handshake the MLKEM was negotiated.
 
