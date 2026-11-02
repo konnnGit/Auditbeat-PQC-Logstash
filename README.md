@@ -1,3 +1,4 @@
+<img width="670" height="384" alt="mlkem" src="https://github.com/user-attachments/assets/1d0ecf2d-cf49-4fac-bd13-2e2e01109c61" />
 
 # Dockerized PQC mTLS Between Auditbeat and Logstash Testbed
 
@@ -60,4 +61,4 @@ After system boots, verify that logstash receives auditbeat events:
 docker compose logs -f logstash
 ```
 As depicted in the following picture, during the handshake the MLKEM was negotiated.
-![pic][mlkem.png]
+
